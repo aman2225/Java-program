@@ -1,0 +1,3 @@
+This projects takes input city from user and gives output about whether information such as
+temperature,humidity,Pressure,Wind Speed.
+We used basic java swing and mysql technologies to graps basic concepts of java.
