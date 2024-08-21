@@ -90,6 +90,7 @@ public class jdbc extends JFrame {
 
         // Connect to the database
         try {
+//            mysql databse connection.
             String url = "jdbc:mysql://localhost:3306/java";
             String username = "root";
             String password = "Amankumar@22";
@@ -102,6 +103,7 @@ public class jdbc extends JFrame {
 
     private void fetchWeather(String city) {
         try {
+
             String apiKey = "1523172bd53d053c37abeb791f3c2a57";
             String apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + URLEncoder.encode(city, "UTF-8") + "&appid=" + apiKey + "&units=metric";
             URL url = new URL(apiUrl);
