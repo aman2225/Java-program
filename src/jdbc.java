@@ -13,23 +13,65 @@ public class jdbc extends JFrame {
     public jdbc() {
         setTitle("Weather App");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
+        setLayout(new GridBagLayout());
 
+        // Set modern Look and Feel
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Set custom font and colors
+        Font font = new Font("Arial", Font.PLAIN, 14);
+        Color bgColor = new Color(135, 206, 235);
+        Color textColor = new Color(33, 33, 33);
+        Color btnColor = new Color(66, 133, 244);
+
+        // Configure components
         JLabel cityLabel = new JLabel("Enter City:");
-        cityField = new JTextField(20);
-        JButton fetchButton = new JButton("Fetch Weather");
-        resultArea = new JTextArea(15, 40);
-        resultArea.setEditable(false);
+        cityLabel.setFont(font);
+        cityLabel.setForeground(textColor);
 
-        JPanel inputPanel = new JPanel();
-        inputPanel.add(cityLabel);
-        inputPanel.add(cityField);
-        inputPanel.add(fetchButton);
+        cityField = new JTextField(20);
+        cityField.setFont(font);
+        cityField.setBackground(Color.PINK);
+        cityField.setForeground(textColor);
+
+        JButton fetchButton = new JButton("Fetch Weather");
+        fetchButton.setFont(font);
+        fetchButton.setBackground(btnColor);
+        fetchButton.setForeground(Color.BLUE);
+        fetchButton.setFocusPainted(false);
+
+        resultArea = new JTextArea(15, 40);
+        resultArea.setFont(font);
+        resultArea.setEditable(false);
+        resultArea.setBackground(Color.WHITE);
+        resultArea.setForeground(textColor);
 
         JScrollPane scrollPane = new JScrollPane(resultArea);
+        scrollPane.setBackground(bgColor);
 
-        add(inputPanel, BorderLayout.NORTH);
-        add(scrollPane, BorderLayout.CENTER);
+        // Add components to the layout
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.WEST;
+        add(cityLabel, gbc);
+
+        gbc.gridx = 1;
+        add(cityField, gbc);
+
+        gbc.gridx = 2;
+        add(fetchButton, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 3;
+        gbc.fill = GridBagConstraints.BOTH;
+        add(scrollPane, gbc);
 
         fetchButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -44,6 +86,7 @@ public class jdbc extends JFrame {
 
         pack();
         setLocationRelativeTo(null);
+        getContentPane().setBackground(bgColor);
 
         // Connect to the database
         try {
